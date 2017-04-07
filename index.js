@@ -1,8 +1,9 @@
 var inquirer = require("inquirer");
 
-//Flashcard is implimented but Clozecard is not for now;
-var Flashcard = require("./flashcard.js");
+var BasicCard = require("./basiccard.js");
+// var tester = new BasicCard("this is gonna be a?", "TESTER");
 var Clozecard = require("./Clozecard.js");
+// var tester = new ClozeCard("this is gonna be a TESTER", "TESTER");
 
 var count = 0;
 
@@ -16,7 +17,7 @@ var flashcardLogic = function() {
 
 	if (count < 2) {
 
-		console.log("NEW FLASHCARD");
+		console.log("NEW BASICCARD");
 
 		inquirer.prompt([
 		{
@@ -27,7 +28,7 @@ var flashcardLogic = function() {
 			message: "What is the answer for the back?"
 		}
 			]).then(function(answers) {
-				var newCard = new Flashcard(
+				var newCard = new BasicCard(
 					answers.front,
 					answers.back);
 
