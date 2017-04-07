@@ -1,6 +1,8 @@
 var inquirer = require("inquirer");
 
+//Flashcard is implimented but Clozecard is not for now;
 var Flashcard = require("./flashcard.js");
+var Clozecard = require("./Clozecard.js");
 
 var count = 0;
 
@@ -38,28 +40,28 @@ var flashcardLogic = function() {
 			})
 	} else {
 
-			inquirer.prompt([
-			{
-				name: "first",
-			 	message: questionsArray[0].front
-			},
-			{
-				name: "second",
-			 	message: questionsArray[1].front
-			}
-				]).then(function(answers) {
-					if(answers.first === questionsArray[0].back){
-						correct++;
-					} else{
-						incorrect++;
-					}
-					if(answers.second === questionsArray[1].back){
-						correct++;
-					} else {
-						incorrect++;
-					}
-					console.log("correct: " + correct + " incorrect: " + incorrect);
-				})
+		inquirer.prompt([
+		{
+			name: "first",
+		 	message: questionsArray[0].front
+		},
+		{
+			name: "second",
+		 	message: questionsArray[1].front
+		}
+			]).then(function(answers) {
+				if(answers.first === questionsArray[0].back){
+					correct++;
+				} else{
+					incorrect++;
+				}
+				if(answers.second === questionsArray[1].back){
+					correct++;
+				} else {
+					incorrect++;
+				}
+				console.log("correct: " + correct + " incorrect: " + incorrect);
+			})
 	}//ends else
 };//ends Flashcardlogic
 

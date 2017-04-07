@@ -1,0 +1,3 @@
+var Clozecard = function(fullText, partialText, clozeDeletion) {
+	// body...
+}
