@@ -5,15 +5,16 @@ var BasicCard = require("./basiccard.js");
 var Clozecard = require("./Clozecard.js");
 // var tester = new ClozeCard("this is gonna be a TESTER", "TESTER");
 
+//variables for flashcard logic
 var count = 0;
-
-var correct = 0;
-
-var incorrect = 0;
-
 var questionsArray = [];
 
-var flashcardLogic = function() {
+//variables for game logic
+var correct = 0;
+var incorrect = 0;
+
+
+var GameLogic = function() {
 
 	if (count < 2) {
 
@@ -37,7 +38,7 @@ var flashcardLogic = function() {
 
 				count++;
 				//loop this inquirer twice for now to see if it's working (two questions)
-				flashcardLogic();
+				GameLogic();
 			})
 	} else {
 
@@ -45,8 +46,7 @@ var flashcardLogic = function() {
 		{
 			name: "first",
 		 	message: questionsArray[0].front
-		},
-		{
+		}, {
 			name: "second",
 		 	message: questionsArray[1].front
 		}
@@ -64,7 +64,7 @@ var flashcardLogic = function() {
 				console.log("correct: " + correct + " incorrect: " + incorrect);
 			})
 	}//ends else
-};//ends Flashcardlogic
+};//ends GameLogic
 
 
-flashcardLogic();
+GameLogic();

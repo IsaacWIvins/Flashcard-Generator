@@ -10,7 +10,11 @@ var ClozeCard = function(full, cloze) {
 	this.partial = this.full.replace(this.cloze, "...");
 }
 
-var tester = new ClozeCard("This is gonna be a TESTER", "TESTER");
-console.log(tester);
+ClozeCard.prototype.showPartial = function() {
+	return this.partial;
+};
+
+// var tester = new ClozeCard("This is gonna be a TESTER", "TESTER");
+// console.log(tester);
 
 module.exports = ClozeCard;

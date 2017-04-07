@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/IsaacWIvins/Flashcard-Generator#readme",
   "dependencies": {
+    "fs": "0.0.1-security",
     "inquirer": "^3.0.6"
   }
 }

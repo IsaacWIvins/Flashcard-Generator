@@ -8,11 +8,16 @@ var BasicCard = function(front, back) {
 	this.back = back;
 }
 
-BasicCard.prototype.printInfo = function() {
-	console.log("Front: " + this.front + ", Back: " + this.back);
+BasicCard.prototype.showFront = function() {
+	return this.front;
 };
 
-var tester = new BasicCard("this is gonna be a?", "TESTER");
-console.log(tester);
+BasicCard.prototype.showBack = function() {
+	return this.back;
+}
+
+BasicCard.prototype.showCard = function() {
+	console.log("Front: " + this.front + ", Back: " + this.back);
+};
 
 module.exports = BasicCard;
