@@ -1,4 +1,5 @@
 var inquirer = require("inquirer");
+var fs = require("fs");
 var BasicCard = require("./basiccard.js");
 var Clozecard = require("./clozecard.js");
 
@@ -20,11 +21,11 @@ var whichType = function() {
 
 				console.log("======== Cloze ========");
 				clozeCardFlashcards();
-
 			}
+		});//ends then
+};//ends which card function
 
-		});
-}
+var basicCarArray = [];
 
 var basicFLashcards = function() {
 	inquirer.prompt([
@@ -34,16 +35,38 @@ var basicFLashcards = function() {
 	}, {
 		name: "back",
 		message: "What is the answer for the back?"
-	}
+	}, 
 		]).then(function(answers) {
 			var newCard = new BasicCard(
 				answers.front,
 				answers.back);
 
-				console.log(newCard);
-			})
+				console.log("======== Card Created =======")
+				basicCarArray.push(newCard);
+				console.log(basicCarArray);
+				//push the new card into a text file here
 
-}
+				inquirer.prompt([
+				{
+					name: "createAgain",
+					type: "list",
+					message: "Create another Basic Flashcard?",
+					choices: ["yes", "no"]
+				}
+					]).then(function(answers) {
+
+						if (answers.createAgain === "yes") {
+							basicFLashcards();
+						} else {
+							console.log("====== Basic Flashcards ========")
+							console.log(basicCarArray)
+							console.log("================================")
+						}
+					})//end then 2
+			})//end then 1
+};//end Basic function
+
+var clozeCardArray = [];
 
 var clozeCardFlashcards = function() {
 	inquirer.prompt([
@@ -62,28 +85,29 @@ var clozeCardFlashcards = function() {
 				answers.cloze,
 				answers.partial)
 
-			console.log(newCard);
-		})
-}
+				console.log("======== Card Created =======")
+				clozeCardArray.push(newCard);
+				console.log(clozeCardArray);
+				//push the new card into a text file here
+
+				inquirer.prompt([
+				{
+					name: "createAgain",
+					type: "list",
+					message: "Create another Clozecard Flashcard?",
+					choices: ["yes", "no"]
+				}
+					]).then(function(answers) {
+
+						if (answers.createAgain === "yes") {
+							clozeCardFlashcards();
+						} else {
+							console.log("======== Clozecard Flashcards ========")
+							console.log(clozeCardArray)
+							console.log("======================================")
+						}
+					})//end then 2
+		})//end then 1
+}//end Cloze Function
 
 whichType();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

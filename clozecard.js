@@ -14,7 +14,4 @@ ClozeCard.prototype.showPartial = function() {
 	return this.partial;
 };
 
-// var tester = new ClozeCard("This is gonna be a TESTER", "TESTER");
-// console.log(tester);
-
 module.exports = ClozeCard;
