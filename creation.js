@@ -157,9 +157,6 @@ var playOrCreate = function() {
 
 var playGame = function() {
 
-		//game logic
-		//set game variables (correct/incorrect, count of cards from arrays)
-
 	inquirer.prompt([
 	{
 		name: "BasicOrCloze",
@@ -170,26 +167,29 @@ var playGame = function() {
 		]).then(function(answers) {
 
 			if (answers.BasicOrCloze === "Basic Flashcards") {
-				console.log("working")
+				console.log("working BASIC flashcards");
+				// basicGame();
 			} else if (answers.BasicOrCloze === "Clozecard Flashcards") {
-				console.log("reallyyyy not working")
+				console.log("working CLOZECARD flashcards");
+				//clozeGame();
 			} else {
 				console.log("WTF DID YOU DO!?!?!?")
 			}
 		})//end then 1
 
-		// basic card game 
-			//JSON.Parse data from the basicCard.txt
-				//loop through cards and have (front be question, back be answer)
-				//randomize card order and ask sequentially untill no cards are left
-
-
-		//cloze card game
-			//JSON.Parse data from the clozeCard.txt
-				//looop through cards and have (partial be question, cloze be answer)
-				//randomize card order and ask sequentially untill no cards are left
-
 }//end playGame()
+
+// basic card game 
+	//JSON.Parse data from the basicCard.txt
+		//loop through cards and have (front be question, back be answer)
+		//randomize card order and ask sequentially untill no cards are left
+
+
+//cloze card game
+	//JSON.Parse data from the clozeCard.txt
+		//looop through cards and have (partial be question, cloze be answer)
+		//randomize card order and ask sequentially untill no cards are left
+
 
 
 
