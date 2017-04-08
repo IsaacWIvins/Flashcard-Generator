@@ -1,5 +1,5 @@
-var inquirer = require("inquirer");
 var fs = require("fs");
+var inquirer = require("inquirer");
 var BasicCard = require("./basiccard.js");
 var Clozecard = require("./clozecard.js");
 
@@ -44,7 +44,6 @@ var basicFLashcards = function() {
 				console.log("======== Card Created =======")
 				basicCarArray.push(newCard);
 				console.log(basicCarArray);
-				//push the new card into a text file here
 
 				inquirer.prompt([
 				{
@@ -61,6 +60,9 @@ var basicFLashcards = function() {
 							console.log("====== Basic Flashcards ========")
 							console.log(basicCarArray)
 							console.log("================================")
+
+							basicCarArray = JSON.stringify(basicCarArray);
+							basicCardPush();
 						}
 					})//end then 2
 			})//end then 1
@@ -109,5 +111,16 @@ var clozeCardFlashcards = function() {
 					})//end then 2
 		})//end then 1
 }//end Cloze Function
+
+var basicCardPush = function() {
+	fs.appendFile("basicCard.txt", "&" + basicCarArray, function(err) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log("Content Added!");
+		}
+	})
+};
+
 
 whichType();
