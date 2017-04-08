@@ -107,6 +107,9 @@ var clozeCardFlashcards = function() {
 							console.log("======== Clozecard Flashcards ========")
 							console.log(clozeCardArray)
 							console.log("======================================")
+
+							clozeCardArray = JSON.stringify(clozeCardArray);
+							clozeCardPush();
 						}
 					})//end then 2
 		})//end then 1
@@ -117,7 +120,17 @@ var basicCardPush = function() {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log("Content Added!");
+			console.log("=========Content Added!=========");
+		}
+	})
+};
+
+var clozeCardPush = function() {
+	fs.appendFile("clozeCard.txt", "&" + clozeCardArray, function(err) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log("=========Content Added!=========");
 		}
 	})
 };
