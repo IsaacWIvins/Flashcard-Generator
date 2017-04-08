@@ -26,6 +26,7 @@ var whichType = function() {
 };//ends which card function
 
 var basicCarArray = [];
+var basicCardString = "";
 
 var basicFLashcards = function() {
 	inquirer.prompt([
@@ -61,24 +62,22 @@ var basicFLashcards = function() {
 							console.log(basicCarArray)
 
 							basicCardPush();
+
 						}
 					})//end then 2
 			})//end then 1
 };//end Basic function
 
 var basicCardPush = function() {
-
-	//clean basicCardArray
-	var basicCardString = JSON.stringify(basicCarArray);
-		basicCardString.replace("[" "", "]" "", "{" "", "}" "");
-		//build string form it called basicCardString
-		//log string
+		basicCardString = JSON.stringify(basicCarArray);
+		console.log("first: " + basicCardString);
 
 	fs.appendFile("basicCard.txt", basicCardString, function(err) {
 		if (err) {
 			console.log(err);
 		} else {
 			console.log("=========Content Added!=========");
+			playOrCreate();
 		}
 	})
 };//end basicCardPush()
@@ -146,7 +145,7 @@ var playOrCreate = function() {
 	{
 		name: "start",
 		type: "list",
-		message: "Would you like to Play Game or create Flashcards?",
+		message: "Would you like to Play Game or Create Flashcards?",
 		choices: ["Play Game", "Create Flashcards"]
 	}
 		]).then(function(answers) {
@@ -185,43 +184,44 @@ var playGame = function() {
 
 }//end playGame()
 
-// var basicGame = function() {
+var fixedBasicData;
+var parsedBasicData;
 
-// 	parseBasic();
-// 		//loop through cards and have (front be question, back be answer)
-// 		//randomize card order and ask sequentially untill no cards are left
-// };
+var basicGame = function() {
 
-// var parseBasic = function() {
+	parseBasic();
+		//loop through cards and have (front be question, back be answer)
+		//randomize card order and ask sequentially untill no cards are left
+};
 
-// 	fs.readFile("basicCard.txt", "utf8", function(error, data) {
+var parseBasic = function() {
 
-// 		if(error) {
-// 			console.log(error);
-// 		} else {
+	fs.readFile("basicCard.txt", "utf8", function(error, data) {
 
-// 			console.log(data.split("&"));
+		if(error) {
+			console.log(error);
+		} else {
 
-// 			// Then split it by commas (to make it more readable)
-// 			// var dataArr = data.split(",");
+			fixedBasicData = data.replace("][", ",");
+			parsedBasicData = JSON.parse(fixedBasicData);
+			console.log(parsedBasicData);
+			console.log("length ===== " + parsedBasicData.length);
+			console.log("first ===== " + parsedBasicData[0].front);
+		}
 
-// 			// We will then re-display the content as an array for later use.
-// 			// console.log(dataArr);
-// 		}
+	});
+};
 
-// 	});
-// };
+var clozeGame = function() {
 
-// var clozeGame = function() {
+	parseCloze();
+		//looop through cards and have (partial be question, cloze be answer)
+		//randomize card order and ask sequentially untill no cards are left
+};
 
-// 	parseCloze();
-// 		//looop through cards and have (partial be question, cloze be answer)
-// 		//randomize card order and ask sequentially untill no cards are left
-// };
-
-// var parseCloze = function() {
-// 	//JSON.Parse data from the clozeCard.txt
-// };
+var parseCloze = function() {
+	//JSON.Parse data from the clozeCard.txt
+};
 
 
 
