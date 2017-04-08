@@ -59,14 +59,29 @@ var basicFLashcards = function() {
 						} else {
 							console.log("====== Basic Flashcards ========")
 							console.log(basicCarArray)
-							console.log("================================")
 
-							basicCarArray = JSON.stringify(basicCarArray);
 							basicCardPush();
 						}
 					})//end then 2
 			})//end then 1
 };//end Basic function
+
+var basicCardPush = function() {
+
+	//clean basicCardArray
+	var basicCardString = JSON.stringify(basicCarArray);
+		basicCardString.replace("[" "", "]" "", "{" "", "}" "");
+		//build string form it called basicCardString
+		//log string
+
+	fs.appendFile("basicCard.txt", basicCardString, function(err) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log("=========Content Added!=========");
+		}
+	})
+};//end basicCardPush()
 
 var clozeCardArray = [];
 
@@ -115,15 +130,6 @@ var clozeCardFlashcards = function() {
 		})//end then 1
 }//end Cloze Function
 
-var basicCardPush = function() {
-	fs.appendFile("basicCard.txt", "&" + basicCarArray, function(err) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log("=========Content Added!=========");
-		}
-	})
-};//end basicCardPush()
 
 var clozeCardPush = function() {
 	fs.appendFile("clozeCard.txt", "&" + clozeCardArray, function(err) {
@@ -166,9 +172,9 @@ var playGame = function() {
 	}
 		]).then(function(answers) {
 
+
 			if (answers.BasicOrCloze === "Basic Flashcards") {
-				console.log("working BASIC flashcards");
-				// basicGame();
+				basicGame();
 			} else if (answers.BasicOrCloze === "Clozecard Flashcards") {
 				console.log("working CLOZECARD flashcards");
 				//clozeGame();
@@ -179,45 +185,48 @@ var playGame = function() {
 
 }//end playGame()
 
-// basic card game 
-	//JSON.Parse data from the basicCard.txt
-		//loop through cards and have (front be question, back be answer)
-		//randomize card order and ask sequentially untill no cards are left
+// var basicGame = function() {
 
+// 	parseBasic();
+// 		//loop through cards and have (front be question, back be answer)
+// 		//randomize card order and ask sequentially untill no cards are left
+// };
 
-//cloze card game
-	//JSON.Parse data from the clozeCard.txt
-		//looop through cards and have (partial be question, cloze be answer)
-		//randomize card order and ask sequentially untill no cards are left
+// var parseBasic = function() {
 
+// 	fs.readFile("basicCard.txt", "utf8", function(error, data) {
 
+// 		if(error) {
+// 			console.log(error);
+// 		} else {
+
+// 			console.log(data.split("&"));
+
+// 			// Then split it by commas (to make it more readable)
+// 			// var dataArr = data.split(",");
+
+// 			// We will then re-display the content as an array for later use.
+// 			// console.log(dataArr);
+// 		}
+
+// 	});
+// };
+
+// var clozeGame = function() {
+
+// 	parseCloze();
+// 		//looop through cards and have (partial be question, cloze be answer)
+// 		//randomize card order and ask sequentially untill no cards are left
+// };
+
+// var parseCloze = function() {
+// 	//JSON.Parse data from the clozeCard.txt
+// };
 
 
 
 
 playOrCreate();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
