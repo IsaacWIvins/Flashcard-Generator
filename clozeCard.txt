@@ -1,1 +1,1 @@
-&[{"full":"I am Isaac","cloze":"Isaac","partial":"I am ..."},{"full":"I am 23 years old","cloze":"23","partial":"I am ... years old"}]
+&[{"full":"I am Isaac","cloze":"Isaac","partial":"I am ..."},{"full":"I am 23 years old","cloze":"23","partial":"I am ... years old"}]&[{"full":"My name is Isaac","cloze":"Isaac","partial":"My name is ..."},{"full":"I am 23 years old","cloze":"23","partial":"I am ... years old"}]
