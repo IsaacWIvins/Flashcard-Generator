@@ -123,7 +123,7 @@ var basicCardPush = function() {
 			console.log("=========Content Added!=========");
 		}
 	})
-};
+};//end basicCardPush()
 
 var clozeCardPush = function() {
 	fs.appendFile("clozeCard.txt", "&" + clozeCardArray, function(err) {
@@ -133,7 +133,97 @@ var clozeCardPush = function() {
 			console.log("=========Content Added!=========");
 		}
 	})
-};
+};//end clozeCardPush
+
+var playOrCreate = function() {
+	inquirer.prompt([
+	{
+		name: "start",
+		type: "list",
+		message: "Would you like to Play Game or create Flashcards?",
+		choices: ["Play Game", "Create Flashcards"]
+	}
+		]).then(function(answers) {
+
+			if (answers.start === "Create Flashcards") {
+				whichType();
+			} else if (answers.start === "Play Game") {
+				playGame();
+			} else {
+				console.log("WTF DID YOU DO!?!?!?")
+			}
+		})//end then 1
+}// end play or create()
+
+var playGame = function() {
+
+		//game logic
+		//set game variables (correct/incorrect, count of cards from arrays)
+
+	inquirer.prompt([
+	{
+		name: "BasicOrCloze",
+		type: "list",
+		message: "Which cards would you like to play your game with?",
+		choices: ["Basic Flashcards", "Clozecard Flashcards"]
+	}
+		]).then(function(answers) {
+
+			if (answers.BasicOrCloze === "Basic Flashcards") {
+				console.log("working")
+			} else if (answers.BasicOrCloze === "Clozecard Flashcards") {
+				console.log("reallyyyy not working")
+			} else {
+				console.log("WTF DID YOU DO!?!?!?")
+			}
+		})//end then 1
+
+		// basic card game 
+			//JSON.Parse data from the basicCard.txt
+				//loop through cards and have (front be question, back be answer)
+				//randomize card order and ask sequentially untill no cards are left
 
 
-whichType();
+		//cloze card game
+			//JSON.Parse data from the clozeCard.txt
+				//looop through cards and have (partial be question, cloze be answer)
+				//randomize card order and ask sequentially untill no cards are left
+
+}//end playGame()
+
+
+
+
+
+playOrCreate();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
