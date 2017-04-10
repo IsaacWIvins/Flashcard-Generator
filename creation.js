@@ -1,5 +1,7 @@
 var fs = require("fs");
+var os = require("os");
 var inquirer = require("inquirer");
+var Regex = require("regex");
 var BasicCard = require("./basiccard.js");
 var Clozecard = require("./clozecard.js");
 
@@ -24,9 +26,6 @@ var whichType = function() {
 			}
 		});//ends then
 };//ends which card function
-
-var basicCarArray = [];
-var basicCardString = "";
 
 var basicFLashcards = function() {
 	inquirer.prompt([
@@ -69,10 +68,25 @@ var basicFLashcards = function() {
 };//end Basic function
 
 var basicCardPush = function() {
-		basicCardString = JSON.stringify(basicCarArray);
-		console.log("first: " + basicCardString);
 
-	fs.appendFile("basicCard.txt", basicCardString, function(err) {
+	var logString = '';
+
+
+	for (var i in basicCarArray) {
+
+		if (i < basicCarArray.length){
+			logString += basicCarArray[i].front + ',' + basicCarArray[i].back + os.EOL;
+		}
+		else {
+			logString += basicCarArray[i].front + ',' + basicCarArray[i].back;
+		}
+
+		
+	}
+		// basicCardString = JSON.stringify(basicCarArray);
+		// console.log("first: " + basicCardString);
+
+	fs.appendFile("basicCard.txt", logString, function(err) {
 		if (err) {
 			console.log(err);
 		} else {
@@ -193,6 +207,8 @@ var basicGame = function() {
 		//loop through cards and have (front be question, back be answer)
 		//randomize card order and ask sequentially untill no cards are left
 };
+var basicCarArray = [];
+var basicCardString = "";
 
 var parseBasic = function() {
 
@@ -201,12 +217,18 @@ var parseBasic = function() {
 		if(error) {
 			console.log(error);
 		} else {
+			// var pattern = "][";
+			// data = new Regex(pattern, ",")
+			// console.log("data: " + data);
+			// data = JSON.parse(data);
+			// console.log("pasedBasicData: " + parsedBasicData);
+			// console.log("length ===== " + parsedBasicData.length);
+			// console.log("first =====" + parsedBasicData[0].front);
 
-			fixedBasicData = data.replace("][", ",");
-			parsedBasicData = JSON.parse(fixedBasicData);
-			console.log(parsedBasicData);
-			console.log("length ===== " + parsedBasicData.length);
-			console.log("first ===== " + parsedBasicData[0].front);
+			var savedCardArray = data.split(os.EOL)
+			//length minus 1;
+			console.log(savedCardArray);
+			console.log(savedCardArray[0].split(','));
 		}
 
 	});
