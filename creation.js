@@ -12,7 +12,8 @@ var basicCarArray = [];
 var clozeCardArray = [];
 
 //arrays after imported from txt file
-var savedBasicCardArray = [];
+//array to have the new cards (post txt file) pushed to
+var newBasicArray = [];
 
 //function to see which type of flashcard is going to be created
 var whichType = function() {
@@ -243,18 +244,6 @@ var basicGame = function() {
 			// splits the txt file string at linebreaks (os.EOL)
 			data = data.split(os.EOL);
 
-			console.log("==================")
-
-			console.log("array length ", data.length);
-
-			console.log("==================")
-
-			console.log(data)
-
-			console.log("==================")
-
-			//creating an array to have the new cards pushed to
-			var newBasicArray = [];
 				//loops through data at split (- 1) to get rid of last space
 				for (var i = 0; i < data.length - 1; i++) {
 					//creating a new array to split all data at line break
@@ -267,16 +256,23 @@ var basicGame = function() {
 						createdCard[1]);
 					//pushing the newCard data to a scopped newBasicArray
 					newBasicArray.push(newCard);
+					console.log("=====")
 					
 				}
-				//logs the new Basic Array with all the cards from the txt file
-				console.log(newBasicArray);
 
 			}
+			basicLogic();
 		})
 		
 };
+var basicLogic = function() {
+	console.log("/////////////////////");
+	console.log("just the array",newBasicArray);
 
+	for (var i = 0; i < newBasicArray.length; i++) {
+		//the logic to ask questions goes here
+	}
+}
 var clozeGame = function() {
 		//just fuckin mimic the basic card one once you figure it out
 };
