@@ -1,9 +1,10 @@
 var fs = require("fs");
 var os = require("os");
 var inquirer = require("inquirer");
-var Regex = require("regex");
 var BasicCard = require("./basiccard.js");
 var Clozecard = require("./clozecard.js");
+var basicCarArray = [];
+var savedBasicCardArray = [];
 
 var whichType = function() {
 	inquirer.prompt([
@@ -180,7 +181,7 @@ var playGame = function() {
 	{
 		name: "BasicOrCloze",
 		type: "list",
-		message: "Which cards would you like to play your game with?",
+		message: "Which cards would you like to play with?",
 		choices: ["Basic Flashcards", "Clozecard Flashcards"]
 	}
 		]).then(function(answers) {
@@ -198,63 +199,40 @@ var playGame = function() {
 
 }//end playGame()
 
-var fixedBasicData;
-var parsedBasicData;
-
 var basicGame = function() {
 
-	parseBasic();
-		//loop through cards and have (front be question, back be answer)
-		//randomize card order and ask sequentially untill no cards are left
-};
-var basicCarArray = [];
-var basicCardString = "";
-
-var parseBasic = function() {
 
 	fs.readFile("basicCard.txt", "utf8", function(error, data) {
 
-		if(error) {
+		if (error) {
 			console.log(error);
-		} else {
-			// var pattern = "][";
-			// data = new Regex(pattern, ",")
-			// console.log("data: " + data);
-			// data = JSON.parse(data);
-			// console.log("pasedBasicData: " + parsedBasicData);
-			// console.log("length ===== " + parsedBasicData.length);
-			// console.log("first =====" + parsedBasicData[0].front);
 
-			var savedCardArray = data.split(os.EOL)
-			//length minus 1;
-			console.log(savedCardArray);
-			console.log(savedCardArray[0].split(','));
-		}
+		} else if (!error) {
 
-	});
+			var savedBasicCardArray = data.split(os.EOL);
+
+			console.log("==================")
+
+				for (var i = 0; i < savedBasicCardArray.length - 1; i++) {
+					console.log(savedBasicCardArray[i].split(','));
+					console.log(savedBasicCardArray[i][0])
+				}
+
+			}
+		})
+		
 };
 
 var clozeGame = function() {
 
-	parseCloze();
 		//looop through cards and have (partial be question, cloze be answer)
 		//randomize card order and ask sequentially untill no cards are left
-};
-
-var parseCloze = function() {
-	//JSON.Parse data from the clozeCard.txt
 };
 
 
 
 
 playOrCreate();
-
-
-
-
-
-
 
 
 
