@@ -240,24 +240,37 @@ var basicGame = function() {
 
 		} else if (!error) {
 
-			//splits the txt file string at linebreaks (os.EOL)
-			var savedBasicCardArray = data.split(os.EOL);
+			// splits the txt file string at linebreaks (os.EOL)
+			data = data.split(os.EOL);
 
 			console.log("==================")
 
-			console.log("array length ", savedBasicCardArray.length);
+			console.log("array length ", data.length);
 
 			console.log("==================")
 
-				for (var i = 0; i < savedBasicCardArray.length - 1; i++) {
-					console.log("array length ",savedBasicCardArray.length)
-					console.log(savedBasicCardArray[i].split(','));
-					// savedBasicCardArray has 5 lines (4 + extra line)
-					// need to loop through the 4, create objects (q & a's)
-					// use inquire to loop through objects and ask q's
-					// check q's with a's and score (correct, incorrect)
-					// track wins and losses
+			console.log(data)
+
+			console.log("==================")
+
+			//creating an array to have the new cards pushed to
+			var newBasicArray = [];
+				//loops through data at split (- 1) to get rid of last space
+				for (var i = 0; i < data.length - 1; i++) {
+					//creating a new array to split all data at line break
+					var savedBasicCardArray = data[i].split(os.EOL);
+					//setting the array to a variable by splitting at ","
+					var createdCard = savedBasicCardArray[0].split(",");
+					//recreating the basic card object with the new data from txt file
+					var newCard = new BasicCard(
+						createdCard[0],
+						createdCard[1]);
+					//pushing the newCard data to a scopped newBasicArray
+					newBasicArray.push(newCard);
+					
 				}
+				//logs the new Basic Array with all the cards from the txt file
+				console.log(newBasicArray);
 
 			}
 		})
