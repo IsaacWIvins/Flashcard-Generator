@@ -256,7 +256,6 @@ var basicGame = function() {
 						createdCard[1]);
 					//pushing the newCard data to a scopped newBasicArray
 					newBasicArray.push(newCard);
-					console.log("=====")
 					
 				}
 
@@ -265,14 +264,45 @@ var basicGame = function() {
 		})
 		
 };
+//this is like 90% working as of now
+//the problem is i can only ask one question and answer, scoring isn't set up yet
+//ask Rony for help
 var basicLogic = function() {
-	console.log("/////////////////////");
-	console.log("just the array",newBasicArray);
-
+	//settign arrays for front and back of card
+	var basicQuestionArray = [];
+	var basicAnswerArray = [];
+	//looping through the array built from (basicGame())
 	for (var i = 0; i < newBasicArray.length; i++) {
-		//the logic to ask questions goes here
+		//pushes front and back respectivly
+		basicQuestionArray.push(newBasicArray[i].front);
+		basicAnswerArray.push(newBasicArray[i].back);
 	}
+	//asking user the question (grabbed from the basicQuestionArray)
+	inquirer.prompt([
+		{
+			name: "question",
+			type: "input",
+			message: function() {
+				//looping through the questions array and displaying the first one unfortunatley
+				for (var i = 0; i < basicQuestionArray.length; i++) {
+				return basicQuestionArray[i];
+				}
+			}
+		}	//this part does work.. kinda
+			]).then(function(answers) {
+				//looping through the questions array and displaying the first one unfortunatley
+				for (var i = 0; i < basicAnswerArray.length; i++) {
+					if (answers.question === basicAnswerArray[i]) {
+						console.log("working");
+					} else {
+						console.log("not working=========");
+					}
+				} 
+
+			})
+
 }
+//underconstruction
 var clozeGame = function() {
 		//just fuckin mimic the basic card one once you figure it out
 };
