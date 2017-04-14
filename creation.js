@@ -14,6 +14,8 @@ var clozeCardArray = [];
 //arrays after imported from txt file
 //array to have the new cards (post txt file) pushed to
 var newBasicArray = [];
+var currentIndex = 0;
+var currentScore = 0;
 
 //function to see which type of flashcard is going to be created
 var whichType = function() {
@@ -254,54 +256,69 @@ var basicGame = function() {
 					var newCard = new BasicCard(
 						createdCard[0],
 						createdCard[1]);
+
 					//pushing the newCard data to a scopped newBasicArray
 					newBasicArray.push(newCard);
+
 					
 				}
+					console.log(newBasicArray)
+					console.log("front",newBasicArray[0].front)
+					console.log(currentIndex);
+					console.log(currentScore)
 
 			}
-			basicLogic();
+			basicLogic(newBasicArray, currentIndex, currentScore);
 		})
 		
 };
 //this is like 90% working as of now
 //the problem is i can only ask one question and answer, scoring isn't set up yet
 //ask Rony for help
-var basicLogic = function() {
-	//settign arrays for front and back of card
-	var basicQuestionArray = [];
-	var basicAnswerArray = [];
-	//looping through the array built from (basicGame())
-	for (var i = 0; i < newBasicArray.length; i++) {
-		//pushes front and back respectivly
-		basicQuestionArray.push(newBasicArray[i].front);
-		basicAnswerArray.push(newBasicArray[i].back);
+var currentIndex = 0;
+var initialScore = 0;
+
+var playRound = function (newBasicArray, currentIndex, currentScore) {
+
+	if (currentIndex < newBasicArray.length) {
+		basicLogic(newBasicArray, currentIndex, currentScore);
+		console.log("working")
+
+	} else {
+		console.log("end of round");
+		//create endGame()
 	}
-	//asking user the question (grabbed from the basicQuestionArray)
+}
+
+var basicLogic = function(newBasicArray, currentIndex, currentScore) {
+
+	console.log("current Index: " + currentIndex + " | current Score: " + currentScore)
+
 	inquirer.prompt([
+
 		{
 			name: "question",
 			type: "input",
-			message: function() {
-				//looping through the questions array and displaying the first one unfortunatley
-				for (var i = 0; i < basicQuestionArray.length; i++) {
-				return basicQuestionArray[i];
-				}
-			}
-		}	//this part does work.. kinda
+			message: newBasicArray[currentIndex].front
+		}
 			]).then(function(answers) {
-				//looping through the questions array and displaying the first one unfortunatley
-				for (var i = 0; i < basicAnswerArray.length; i++) {
-					if (answers.question === basicAnswerArray[i]) {
-						console.log("working");
-					} else {
-						console.log("not working=========");
-					}
-				} 
+
+				if (answers.question === newBasicArray[currentIndex].back) {
+					console.log("working");
+					currentScore++;
+				} else {
+					console.log("not working");
+				}
+
+				currentIndex++;
+
+				basicLogic(newBasicArray, currentIndex, currentScore);
 
 			})
 
-}
+
+};
+
 //underconstruction
 var clozeGame = function() {
 		//just fuckin mimic the basic card one once you figure it out
