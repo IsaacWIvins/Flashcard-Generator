@@ -1,6 +1,5 @@
 who am i,isaac
 what's your last name,ivins
-who am i,isaac
-what's your last name,ivins
 how old are you?,23
 asdf,fdsa
+OH gad please work,maybe

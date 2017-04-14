@@ -14,6 +14,8 @@ var clozeCardArray = [];
 //arrays after imported from txt file
 //array to have the new cards (post txt file) pushed to
 var newBasicArray = [];
+
+//round logic variables;
 var currentIndex = 0;
 var currentScore = 0;
 
@@ -207,6 +209,7 @@ var playOrCreate = function() {
 
 //fucntion to text users knowledge of flashcards
 var playGame = function() {
+
 	//first we ask if the user is playing with Basic or Clozecard Flashcards
 	inquirer.prompt([
 	{
@@ -268,25 +271,20 @@ var basicGame = function() {
 					console.log(currentScore)
 
 			}
-			basicLogic(newBasicArray, currentIndex, currentScore);
+			playRound(newBasicArray, currentIndex, currentScore);
 		})
 		
 };
-//this is like 90% working as of now
-//the problem is i can only ask one question and answer, scoring isn't set up yet
-//ask Rony for help
-var currentIndex = 0;
-var initialScore = 0;
 
 var playRound = function (newBasicArray, currentIndex, currentScore) {
 
 	if (currentIndex < newBasicArray.length) {
 		basicLogic(newBasicArray, currentIndex, currentScore);
-		console.log("working")
 
 	} else {
 		console.log("end of round");
-		//create endGame()
+		console.log("//////////////////           /////////////////")
+		endBasicGame(newBasicArray, currentIndex, currentScore)
 	}
 }
 
@@ -307,22 +305,22 @@ var basicLogic = function(newBasicArray, currentIndex, currentScore) {
 					console.log("working");
 					currentScore++;
 				} else {
-					console.log("not working");
+					console.log("======== WRONG!!! =======");
 				}
 
 				currentIndex++;
 
-				basicLogic(newBasicArray, currentIndex, currentScore);
+				playRound(newBasicArray, currentIndex, currentScore);
 
 			})
 
 
 };
 
-//underconstruction
-var clozeGame = function() {
-		//just fuckin mimic the basic card one once you figure it out
-};
+var endBasicGame = function(newBasicArray, currentIndex, currentScore) {
+	console.log("======== END OF GAME!! HERE'S HOW YOU DID =======");
+	console.log("Current Score: " + currentScore);
+}
 
 //function to "put on for my city"-Jeeze? maybe lil wayne? idk it starts the app
 playOrCreate();
