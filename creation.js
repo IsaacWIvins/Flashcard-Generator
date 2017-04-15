@@ -14,6 +14,7 @@ var clozeCardArray = [];
 //arrays after imported from txt file
 //array to have the new cards (post txt file) pushed to
 var newBasicArray = [];
+var newClozeArray = [];
 
 //round logic variables;
 var currentIndex = 0;
@@ -162,22 +163,35 @@ var clozeCardFlashcards = function() {
 							console.log("======== Clozecard Flashcards ========")
 							console.log(clozeCardArray)
 							console.log("======================================")
-							//this is subject to change for once i figure out how to do basic
-							clozeCardArray = JSON.stringify(clozeCardArray);
-							//pushed the flashcard constructors to a txt file
+
 							clozeCardPush();
 						}
 					})//end then 2
 		})//end then 1
-}//end Cloze Function
+};//end Cloze Function
 
-//ALMOST ALL OF THIS WILL CHANGE, LIKE 85% SO KEEP THAT IN MIND
 var clozeCardPush = function() {
-	fs.appendFile("clozeCard.txt", "&" + clozeCardArray, function(err) {
+	
+	var logString = '';
+
+	for (var i in clozeCardArray) {
+
+		if (i < clozeCardArray.length) {
+
+			logString += clozeCardArray[i].partial + "," + clozeCardArray[i].cloze + os.EOL;
+
+		}
+		else {
+			logString += clozeCardArray[i].partial + "," + clozeCardArray[i].cloze;
+		}
+	}
+
+	fs.appendFile("clozeCard.txt", logString, function(err) {
 		if (err) {
 			console.log(err);
 		} else {
 			console.log("=========Content Added!=========");
+			playOrCreate();
 		}
 	})
 };//end clozeCardPush
@@ -205,7 +219,7 @@ var playOrCreate = function() {
 				console.log("WTF DID YOU DO!?!?!?")
 			}
 		})//end then 1
-}// end play or create()
+};// end play or create()
 
 //fucntion to text users knowledge of flashcards
 var playGame = function() {
@@ -227,13 +241,13 @@ var playGame = function() {
 			} else if (answers.BasicOrCloze === "Clozecard Flashcards") {
 				console.log("working CLOZECARD flashcards");
 				//this is under construction for the near future
-				//clozeGame();
+				clozeGame();
 			} else {
 				console.log("WTF DID YOU DO!?!?!?")
 			}
 		})//end then 1
 
-}//end playGame()
+};//end playGame()
 
 //this is the function to play a game with created basic cards
 var basicGame = function() {
@@ -271,56 +285,146 @@ var basicGame = function() {
 					console.log(currentScore)
 
 			}
-			playRound(newBasicArray, currentIndex, currentScore);
+			playBasicRound(newBasicArray, currentIndex, currentScore);
 		})
 		
 };
 
-var playRound = function (newBasicArray, currentIndex, currentScore) {
+var clozeGame = function() {
+	fs.readFile("clozeCard.txt", "utf8", function(err, data) {
+
+		if(err) {
+			console.log(err);
+		}
+		else if (!err) {
+			data = data.split(os.EOL);
+
+			for (var i = 0; i < data.length - 1; i++) {
+				var savedClozeCardArray = data[i].split(os.EOL);
+				var createdCard = savedClozeCardArray[0].split(",");
+
+				var newCard = new Clozecard(
+					createdCard[0],
+					createdCard[1]);
+
+				newClozeArray.push(newCard);
+
+			}
+		}
+		playClozeRound(newClozeArray, currentIndex, currentScore);
+	})
+};
+
+var playBasicRound = function (newBasicArray, currentIndex, currentScore) {
 
 	if (currentIndex < newBasicArray.length) {
 		basicLogic(newBasicArray, currentIndex, currentScore);
 
 	} else {
 		console.log("end of round");
-		console.log("//////////////////           /////////////////")
-		endBasicGame(newBasicArray, currentIndex, currentScore)
+		console.log("//////////////////           /////////////////");
+		endBasicGame(newBasicArray, currentIndex, currentScore);
 	}
-}
+};
+
+var playClozeRound = function (newClozeArray, currentIndex, currentScore) {
+
+	if (currentIndex < newClozeArray.length) {
+		clozeLogic(newClozeArray, currentIndex, currentScore);
+
+	} else {
+		console.log("end of round");
+		console.log("//////////////////           /////////////////");
+		endClozeGame(newClozeArray, currentIndex, currentScore);
+	}
+};
 
 var basicLogic = function(newBasicArray, currentIndex, currentScore) {
 
-	console.log("current Index: " + currentIndex + " | current Score: " + currentScore)
+	console.log("current Index: " + currentIndex + " | current Score: " + currentScore);
 
 	inquirer.prompt([
 
-		{
-			name: "question",
-			type: "input",
-			message: newBasicArray[currentIndex].front
-		}
-			]).then(function(answers) {
+	{
+		name: "question",
+		type: "input",
+		message: newBasicArray[currentIndex].front
+	}
+		]).then(function(answers) {
 
-				if (answers.question === newBasicArray[currentIndex].back) {
-					console.log("working");
-					currentScore++;
-				} else {
-					console.log("======== WRONG!!! =======");
-				}
+			if (answers.question === newBasicArray[currentIndex].back) {
+				console.log("======== CORRECT!! ========");
+				currentScore++;
+			} else {
+				console.log("======== WRONG!!! =======");
+			}
 
-				currentIndex++;
+			currentIndex++;
 
-				playRound(newBasicArray, currentIndex, currentScore);
+			playBasicRound(newBasicArray, currentIndex, currentScore);
 
-			})
+		})
 
 
 };
 
+var clozeLogic = function(newClozeArray, currentIndex, currentScore) {
+
+	console.log("current Index: " + currentIndex + " | currentScore: " + currentScore);
+
+	inquirer.prompt([
+		
+	{
+		name: "question",
+		type: "input",
+		message: newClozeArray[currentIndex].partial
+	}
+		]).then(function(answers) {
+
+			if (answers.question === newClozeArray[currentIndex].cloze) {
+				console.log("======== CORRECT!! ========");
+				currentScore++;
+			} else {
+				console.log("======== WRONG!!! =======")
+			}
+
+			currentIndex++;
+
+			playClozeRound(newClozeArray, currentIndex, currentScore);
+
+		})
+};
+
 var endBasicGame = function(newBasicArray, currentIndex, currentScore) {
+
 	console.log("======== END OF GAME!! HERE'S HOW YOU DID =======");
 	console.log("Current Score: " + currentScore);
-}
+	resetBasic(newBasicArray, currentIndex, currentScore);
 
+};
+
+var endClozeGame = function(newClozeArray, currentIndex, currentScore) {
+
+	console.log("======== END OF GAME!! HERE'S HOW YOU DID =======");
+	console.log("Current Score: " + currentScore);
+	resetCloze(newClozeArray, currentIndex, currentScore);
+
+};
+
+var resetBasic = function(newBasicArray, currentIndex, currentScore) {
+	console.log("====== RESETTING INDEX AND SCORE ======")
+	currentIndex = 0;
+	currentScore = 0;
+	playOrCreate()
+
+};
+
+var resetCloze = function(newClozeArray, currentIndex, currentScore) {
+	console.log("====== RESETTING INDEX AND SCORE ======")
+	currentIndex = 0;
+	currentScore = 0;
+	playOrCreate()
+
+};
 //function to "put on for my city"-Jeeze? maybe lil wayne? idk it starts the app
 playOrCreate();
