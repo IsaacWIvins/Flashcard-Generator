@@ -1,5 +1,2 @@
-who am i,isaac
-what's your last name,ivins
-how old are you?,23
-asdf,fdsa
-OH gad please work,maybe
+Who was the 20th President of the United States?,James A. Garfield
+Who was the 27th President of the United States?,William Howard Taft
