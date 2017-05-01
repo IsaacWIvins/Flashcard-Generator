@@ -2,6 +2,8 @@
 
 Once starting the app you're prompted with a (Play or Create) option in the terminal
 
+# Creating Flashcards (Basic/Clozecard)
+
 ![Creating Flashcard](readme_images/CreateFlashcards.png)
 
 By Selecting "Create Flashcards" you're given the option to create "Basic" or "Clozecard" Flashcards
@@ -52,20 +54,27 @@ There are 3 parts of the Clozecard Flashcard: "Full" is the entire sentence, "Cl
 
 This is an example to show multiple clozecards created.
 
-Creating new cards at any time will add to the existing Flashcards, not override them. The card information is currently stored on a txt file sheet, using node "fs" npm package to read and write to the file. Later on I will use MYSQL to porperly store to a database.
+Creating new cards at any time will add to the existing Flashcards, not override them. The card information is currently stored on a txt file sheet, using node "fs" npm package to read and write to the file. Later on I will use MYSQL to porperly store flashcards into a database.
 
+# Playing Game (Basic/Clozecard)
 
+By Selecting "Play Game" the user is then asked to play with either Clozecard Flashcards or Basic Flashcards
 
+![Creating Flashcard](readme_images/PlayGame.png)
 
+![Creating Flashcard](readme_images/PlayGameB1.png)
 
+If the user chosses to use "Basic Cards", the user is given the current score (correct) while prompted with the first question from the Basic Flashcards txt file. 
 
+![Creating Flashcard](readme_images/PlayGameB2.png)
 
+Once answered the user is informed wether thier responce was correct or incorrect. If correct the current score increments by 1. Once informed if they were correct or not, the next question gets asked from the Basic Flascards txt file. 
 
+![Creating Flashcard](readme_images/PlayGameB3.png)
 
+The app promps the user questions for each card in the basic flashcard file. Once they've all been answered the user is given the amount of thier current score. Since we only used 2 Basic Flashcards for this example, I answered 1 correct and 1 incorrect and the app prompted me with the results.
 
-
-
-
+![Creating Flashcard](readme_images/PlayGameB4.png)
 
 
 
