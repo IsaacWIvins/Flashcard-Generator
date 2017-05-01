@@ -34,4 +34,41 @@ After entering the new Flashcard the user is prompted with option to either "Cre
 
 ![Creating Flashcard](readme_images/ShowCardCreateAnotherBasic.png)
 
-Creating new cards at any time will add to the existing Flashcards, not override them. The card information is currently stored on a txt file sheet, using node "fs" npm package to read and write to the file. Later on I will use MYSQL to porperly store to a database 
+The process for creating Clozecard Flashcards is almost exactly the same. The only difference is instead of the user inputting the "front"(questioin) and the "back"(answer), the user enters a full sentence and then the part of that sentence they would like to be removed. The full sentence minus the part they wanted removed appears as the "question" and the part removed is used at the "answer".
+
+![Creating Flashcard](readme_images/CreateFlashcards.png)
+
+![Creating Flashcard](readme_images/CreatingClozeCard.png)
+
+![Creating Flashcard](readme_images/clozeCardCreationRemoveExample.png)
+
+The first part of the user input is the sentence they need to remember. The second input from the user is the part of the first sentece they wish to remove for their clozecard flashcard.
+
+![Creating Flashcard](readme_images/firstClozeCardCreatedCompletely.png)
+
+There are 3 parts of the Clozecard Flashcard: "Full" is the entire sentence, "Cloze" is the part removed from full (answer), "Partial" the remaining sentence i.e full - cloze (question).
+
+![Creating Flashcard](readme_images/clozeCardSecondExample.png)
+
+This is an example to show multiple clozecards created.
+
+Creating new cards at any time will add to the existing Flashcards, not override them. The card information is currently stored on a txt file sheet, using node "fs" npm package to read and write to the file. Later on I will use MYSQL to porperly store to a database.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
