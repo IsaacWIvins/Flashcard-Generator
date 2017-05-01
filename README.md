@@ -25,10 +25,13 @@ Once Selecting "Create Basic Flashcards" you are first prompted to enter the Fro
 
 ![Creating Flashcard](readme_images/EnteringFirstBasicFront.png)
 
-After entering the Front part of the Flashcard, the user then has to enter the Back or (Answer)
+After entering the Front part of the Flashcard, the user is then propmted to enter the Back or the (Answer).
 
 ![Creating Flashcard](readme_images/EnteringFirstBasicBack.png)
 
-The new Flashcard gets pushed into a basic flashcard array, this array can have any amount of cards, entered at any given time without deleting pre existing cards. Also after entering the new Flashcard the user is prompted with option to either "Create Another Card" or not. Selecting no will bring the user to the "Play or Create" prompt from the begining.
+After entering the new Flashcard the user is prompted with option to either "Create Another Card" or not. Selecting no will bring the user to the "Play or Create" prompt from the begining.
+
 
 ![Creating Flashcard](readme_images/ShowCardCreateAnotherBasic.png)
+
+Creating new cards at any time will add to the existing Flashcards, not override them. The card information is currently stored on a txt file sheet, using node "fs" npm package to read and write to the file. Later on I will use MYSQL to porperly store to a database 
