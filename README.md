@@ -7,9 +7,9 @@ This is a simple back-end Node.JS application used to both create flashcards and
 1. Javascript
 2. Node.JS
 3. Npm Packages
-..* FS
-..* OS
-..* Inquirer
+* FS
+* OS
+* Inquirer
 
 # Creating Flashcards (Basic/Clozecard)
 
