@@ -4,12 +4,12 @@
 This is a simple back-end Node.JS application used to both create flashcards and test the user on the information they provide. You can either "Play" or "Create" with two different types of flashcards. There are "Basic" flashcards that have a front and back, and "Clozecard" flashcards that remove a portion of a sentence provided from the user. Once creating the flashcards the user can either add more at anytime, or test their knoweledge by playing a game with the flashcards they provided. The flashcards are currently saved to a simple txt file, and refferenced later on when playing the game.
 
 **What Did You Use To Make This?**\
-*Javascript
-*Node.JS
-*Npm Packages
-	*FS
-	*OS
-	*Inquirer
+1. Javascript
+2. Node.JS
+3. Npm Packages
+..* FS
+..* OS
+..* Inquirer
 
 # Creating Flashcards (Basic/Clozecard)
 
