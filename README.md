@@ -3,7 +3,7 @@
 **What Am I Looking At?**
 This is a simple back-end Node.JS application used to both create flashcards and test the user on the information they provide. You can either "Play" or "Create" with two different types of flashcards. There are "Basic" flashcards that have a front and back, and "Clozecard" flashcards that remove a portion of a sentence provided from the user. Once creating the flashcards the user can either add more at anytime, or test their knoweledge by playing a game with the flashcards they provided. The flashcards are currently saved to a simple txt file, and refferenced later on when playing the game.
 
-**What Did You Use To Make This?**\
+**What Did You Use To Make This?**
 1. Javascript
 2. Node.JS
 3. Npm Packages
@@ -85,8 +85,20 @@ The app promps the user questions for each card in the basic flashcard file. Onc
 
 ![Creating Flashcard](readme_images/PlayGameB4.png)
 
+Clozecard Flashcards are essentially the same. The only minor difference with the two is that the sentence entere minus the answer is shown as the question. The retracted part is used as the answer and playing with clozecards looks like this. 
 
+![Creating Flashcard](readme_images/PlayGame2.png)
 
+![Creating Flashcard](readme_images/PlayGameC1.png)
 
+![Creating Flashcard](readme_images/PlayGameC3.png)
 
+as you can see the question is the sentence entered earlier but "..." is used as a replacement for the answer
 
+![Creating Flashcard](readme_images/PlayGame4.png)
+
+![Creating Flashcard](readme_images/PlayGame5.png)
+
+![Creating Flashcard](readme_images/PlayGame6.png)
+
+At the very end of every game the Current Score and index reset. Allowing the user to play again starting at 0.
